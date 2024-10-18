@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1>Feedbacks</h1>
+    <div id="feedback-list"></div>
+
+    <script>
+        // Function to fetch feedbacks from the server and display them
+        async function loadFeedbacks() {
+            try {
+                const response = await fetch('http://localhost:5000/feedback');
+                if (response.ok) {
+                    const feedbacks = await response.json();
+                    displayFeedbacks(feedbacks);
+                } else {
+                    console.error('Failed to fetch feedbacks');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        // Function to display feedbacks on the page
+        function displayFeedbacks(feedbacks) {
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = ''; // Clear existing feedbacks
+
+            feedbacks.forEach(feedback => {
+                const feedbackItem = document.createElement('div');
+                feedbackItem.className = 'feedback-item';
+                feedbackItem.textContent = feedback.message; // Display the feedback message
+                feedbackList.appendChild(feedbackItem);
+            });
+        }
+
+        // Load feedbacks when the page loads
+        window.onload = loadFeedbacks;
+    </script>
+</body>
+</html>
