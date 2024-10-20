@@ -6,13 +6,23 @@ const router = express.Router();
 // Create feedback
 router.post('/feedback', async (req, res) => {
     
-    const { message } = req.body;
-    const UserName = req.user ? req.user.displayName || req.user.email : 'Anonymous';
+    const { UserName, message, rating } = req.body;
+    // const UserName = req.user ? req.user.displayName || req.user.email : 'Anonymous';
+
+    if(rating < 1 || rating > 5) {
+        return res.status(400).json({ message: 'Rating must be between 1 and 5' });
+    }
 
     try {
-        const newFeedback = new Feedback({ UserName, message });
+        const newFeedback = new Feedback({ UserName, message, rating });
         await newFeedback.save();
-        res.status(201).json({ message: 'Feedback saved successfully', newFeedback });
+        res.status(201).json({ message: 'Feedback saved successfully',
+        newFeedback: {
+            UserName: newFeedback.UserName,
+            message: newFeedback.message,
+            rating: newFeedback.rating,
+            createdAt: newFeedback.createdAt
+        }});
     } catch (error) {
         console.error('error submitting feedback:',error)
         res.status(400).send('error submitting feedback: '+error.message);
