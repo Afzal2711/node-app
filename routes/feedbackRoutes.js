@@ -31,7 +31,7 @@ router.post('/feedback', async (req, res) => {
 // Get all feedback
 router.get('/feedback', async (req, res) => {
     try {
-        const feedback = await Feedback.find();
+        const feedback = await Feedback.find().sort({ createdAt: -1 });
         res.status(200).json(feedback);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching feedback', error });
