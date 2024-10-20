@@ -16,13 +16,12 @@ router.post('/feedback', async (req, res) => {
     try {
         const newFeedback = new Feedback({ UserName, message, rating });
         await newFeedback.save();
-        res.status(201).json({ message: 'Feedback saved successfully',
-        newFeedback: {
-            UserName: newFeedback.UserName,
-            message: newFeedback.message,
-            rating: newFeedback.rating,
-            createdAt: newFeedback.createdAt
-        }});
+        res.status(201).json({ message: 'Feedback saved successfully',newFeedback });
+        // newFeedback: {
+        //     UserName: newFeedback.UserName,
+        //     message: newFeedback.message,
+        //     rating: newFeedback.rating,
+        //     createdAt: newFeedback.createdAt
     } catch (error) {
         console.error('error submitting feedback:',error)
         res.status(400).send('error submitting feedback: '+error.message);
