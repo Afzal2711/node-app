@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js"
-     "test": "echo \"Error: no test specified\"
+  },
+  "engines": {
+    "node": "22.x"
   },
   "keywords": [],
   "author": "",
