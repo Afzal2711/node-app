@@ -35,6 +35,9 @@ const PORT = process.env.PORT || 5000;
 // Middleware to parse JSON
 app.use(express.json());
 
+const allowedOrigins = ['https://node-app-p2dr.onrender.com/feedback'];
+app.use(cors({ origin: allowedorigins }));
+
 
 console.log('Starting the server...');
 
