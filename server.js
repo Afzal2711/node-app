@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 const allowedOrigins = ['https://node-app-p2dr.onrender.com/feedback'];
-app.use(cors({ origin: allowedorigins }));
+app.use(cors({ origin: allowedOrigins }));
 
 
 console.log('Starting the server...');
