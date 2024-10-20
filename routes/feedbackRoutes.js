@@ -6,10 +6,11 @@ const router = express.Router();
 // Create feedback
 router.post('/feedback', async (req, res) => {
     
-    const { message, createdAt } = req.body;
+    const { message } = req.body;
+    const UserName = req.user ? req.user.displayName || req.user.email : 'Anonymous';
 
     try {
-        const newFeedback = new Feedback({ message, createdAt });
+        const newFeedback = new Feedback({ UserName, message });
         await newFeedback.save();
         res.status(201).json({ message: 'Feedback saved successfully', newFeedback });
     } catch (error) {
