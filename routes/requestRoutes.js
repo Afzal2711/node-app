@@ -7,7 +7,7 @@ router.post('/request-credentials', async (req, res) => {
   const { name, email, role } = req.body;
 
   try {
-    const credentialRequest = new CredentialRequest({ name, email, role });
+    const credentialRequest = new Credentials({ name, email, role });
     await credentialRequest.save();
     res.status(201).json({ message: 'Credentials requested successfully!' });
   } catch (error) {

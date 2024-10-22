@@ -4,11 +4,13 @@ import admin from 'firebase-admin';
 import Feedback from './models/Feedback.js';
 import express from 'express';
 import mongoose from 'mongoose';
+import curriculumRoutes from './routes/curriculumRoutes.js';
 import feedbackRoutes from './routes/feedbackRoutes.js';
 import authRoutes from './routes/authRoutes.js';
 import { verifyToken } from './middleware/authMiddleware.js';
 import { authorizeRoles } from './middleware/roleMiddleware.js';
 import cors from 'cors';
+import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -53,14 +55,16 @@ app.get('/', (req, res) => {
 
 app.use('/',feedbackRoutes);
 
+app.use('/uploads',express.static(path.join(path.resolve(), 'uploads')));
+
+app.use('/curriculum',curriculumRoutes);
+
 // Start the server
 app.listen(PORT, () => {
-    console.log('Server is running on port ${PORT} ');
+    console.log(`Server is running on port ${PORT} `);
 });
 
 app.use('/api/auth', authRoutes );
-
-
 
 app.get('/admin', verifyToken, authorizeRoles('administrator'),(req, res) => {
     res.send('welcome,admin!');
