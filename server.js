@@ -31,7 +31,7 @@ dotenv.config();
 // });
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON
