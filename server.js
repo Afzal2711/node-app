@@ -31,11 +31,12 @@ dotenv.config();
 // });
 
 const app = express();
-// app.use(cors());
+app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 // Middleware to parse JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const allowedOrigins = ['https://node-app-p2dr.onrender.com/feedback'];
 app.use(cors({ origin: allowedOrigins }));
@@ -55,9 +56,10 @@ app.get('/', (req, res) => {
 
 app.use('/',feedbackRoutes);
 
+app.use('/curriculum',curriculumRoutes);
+
 app.use('/uploads',express.static(path.join(path.resolve(), 'uploads')));
 
-app.use('/curriculum',curriculumRoutes);
 
 // Start the server
 app.listen(PORT, () => {
