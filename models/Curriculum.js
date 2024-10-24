@@ -16,11 +16,16 @@ const CurriculumSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    filesize: {
+        type: Number,
+    },
     uploadedAt: {
         type: Date,
         default: Date.now,
     },
-});
+},
+{ timestamps: true } 
+);
 
 const Curriculum = mongoose.model('Curriculum', CurriculumSchema);
 
