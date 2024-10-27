@@ -38,7 +38,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const allowedOrigins = ['https://node-app-p2dr.onrender.com/feedback'];
+const allowedOrigins = ['https://node-app-p2dr.onrender.com'];
 app.use(cors({ origin: allowedOrigins }));
 
 
@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-app.use('/',feedbackRoutes);
+app.use('/feedback',feedbackRoutes);
 
 app.use('/curriculum',curriculumRoutes);
 
